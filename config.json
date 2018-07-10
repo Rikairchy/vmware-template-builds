@@ -1,0 +1,6 @@
+{
+		"vcenter_server":"vcenter01.internal.homelab.systems",
+		"cluster": "cluster01",
+		"datastore": "vmware",
+		"folder":"templates"
+}
