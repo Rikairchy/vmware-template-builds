@@ -1,1 +1,1 @@
-C:/windows/system32/sysprep/sysprep.exe /generalize /oobe /mode:vm /unattend:C:/sysprep.xml /quiet /shutdown
+C:/windows/system32/sysprep/sysprep.exe /generalize /oobe /unattend:C:/sysprep.xml /quiet /shutdown

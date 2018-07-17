@@ -13,6 +13,8 @@ catch {
     Write-Error "You are missing the PowerCLI Module"
 }
 
+$sensitive_env_keys = @("vcenter_username","vcenter_password","redhat_sub_pass")
+
 function Get-Pass($msg){
     $temp_pass = Read-Host -Prompt $msg -AsSecureString
     return [system.Runtime.interopServices.marshal]::PtrToStringAuto([system.runtime.Interopservices.Marshal]::SecurestringToBstr($temp_pass))
@@ -20,7 +22,7 @@ function Get-Pass($msg){
 function Remove-PackerTemplate($config){
     $current_config = Get-Content -Path $config | ConvertFrom-JSON
     if ($current_config.variables.vm_name -in (Get-Template).name){
-        Remove-Template -Template $current_config.variables.vm_name -DeletePermanently -Confirm:$false -Server $srv
+        Remove-Template -Template $current_config.variables.vm_name -DeletePermanently -Confirm:$false
     }
 }
 
@@ -30,7 +32,9 @@ $env:vcenter_username = Read-Host -Prompt "Vcenter User"
 $env:vcenter_password = Get-Pass -msg "Password"
 $env:login_password = Get-Pass -msg "Host login password"
 
-$srv = Connect-VIServer -Server $config.vcenter_server -User $env:vcenter_username -Password $env:vcenter_password | Out-Null
+if(!$global:DefaultViServer){
+    Connect-VIServer -Server $config.vcenter_server -User $env:vcenter_username -Password $env:vcenter_password | Out-Null
+}
 
 foreach($key in ($config | Get-Member -MemberType NoteProperty).Name){
     if (Test-Path -Path ENV:$key){
@@ -39,7 +43,7 @@ foreach($key in ($config | Get-Member -MemberType NoteProperty).Name){
     New-Item -Path ENV:$key -Value $config.$key
 }
 
-$esx_hosts = Get-VMHost -Server $srv
+$esx_hosts = Get-VMHost
 $env:esx_host = $esx_hosts[(Get-Random -Minimum 0 -Maximum $esx_hosts.Count)].Name
 
 if ($PackerConfig){
@@ -61,6 +65,8 @@ else{
     }
 }
 #clear sensitive info
-Remove-Item -Path ENV:login_password
-Remove-Item -Path ENV:vcenter_password
-Remove-Item -Path ENV:redhat_sub_pass
+foreach($cred in $sensitive_env_keys){
+    if(Test-Path -Path ENV:$cred){
+        Remove-Item -Path ENV:$cred
+    }  
+}
