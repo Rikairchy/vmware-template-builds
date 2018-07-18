@@ -32,7 +32,10 @@ $env:vcenter_username = Read-Host -Prompt "Vcenter User"
 $env:vcenter_password = Get-Pass -msg "Password"
 $env:login_password = Get-Pass -msg "Host login password"
 
-if(!$global:DefaultViServer){
+try{
+    $global:DefaultViServer | Out-Null
+}
+catch {
     Connect-VIServer -Server $config.vcenter_server -User $env:vcenter_username -Password $env:vcenter_password | Out-Null
 }
 

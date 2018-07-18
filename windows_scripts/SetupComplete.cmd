@@ -1,1 +1,1 @@
-del C:/sysprep.xml
+del C:\sysprep.xml
