@@ -28,9 +28,7 @@
 			"ssh_username":"root",
 			"ssh_password":"{{user `ssh_password`}}",
 			"floppy_files": [
-				"unattend/ks.cfg",
-				"linux_scripts/rhel_grub",
-				"linux_scripts/ifcfg-eth0"
+				"unattend/ks.cfg"
 			],
 			"boot_command":[
 				"<tab> text ks=hd:fd0:/ks.cfg <enter>"
