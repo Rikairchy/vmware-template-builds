@@ -14,9 +14,6 @@ if [[ -e "/sbin/subscription-manager" ]]; then
 	subscription-manager clean
 fi
 
-rm /etc/sysconfig/network-scripts/ifcfg-ens192 
-cp /media/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0
-
 #generalize
 echo "" > /etc/machine-id
 rm -f /root/*.cfg

@@ -1,5 +1,5 @@
 param(
-    [String]$PackerConfig,
+    [String[]]$PackerConfig,
     [String]$ConfigFile = "config.json",
     [String]$Builds = "builds/"
 )
@@ -54,8 +54,13 @@ if ($PackerConfig){
     if ($PackerConfig -match "rhel"){
         $env:redhat_sub_pass = Get-Pass -msg "RHEL subpass"
     }
-    Remove-PackerTemplate -config "$Builds/$PackerConfig"
-    packer build -force "$Builds/$PackerConfig"
+    foreach($packer in $PackerConfig){
+        Remove-PackerTemplate -config "$Builds/$packer"
+        packer build -force "$Builds/$packer"
+        if ($LASTEXITCODE -ne 0){
+            Write-Error "Packer build failed"
+        }
+    }
 }
 else{
     #add jobs at some point
@@ -63,8 +68,13 @@ else{
         $env:redhat_sub_pass = Get-Pass -msg "RHEL subpass"
     }
     foreach($packer in (Get-ChildItem -Path $Builds)){
+
+        $packer_config.builders[0].guest_os_type
         Remove-PackerTemplate -config "$Builds/$packer"
         packer build -force "$Builds/$packer"
+        if ($LASTEXITCODE -ne 0){
+            Write-Error "Packer build failed"
+        }
     }
 }
 #clear sensitive info
