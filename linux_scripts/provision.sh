@@ -5,6 +5,7 @@ mount /dev/fd0 /media/
 cat /etc/default/grub | sed 's/ rhgb quiet"/"/' > /etc/default/grub
 grub2-mkconfig /etc/default/grub -o /boot/grub2/grub.cfg
 
+yum -y install perl
 yum -y upgrade
 
 #if redhat then unconfig subscription

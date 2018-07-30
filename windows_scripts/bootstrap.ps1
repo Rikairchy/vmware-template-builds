@@ -1,2 +1,2 @@
 A:\ansible_winrm.ps1 -GlobalHttpFirewallAccess
-&E:\setup64.exe /S /v"/qn"
+&E:\setup64.exe /S /v "/qn"
