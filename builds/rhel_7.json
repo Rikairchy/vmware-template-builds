@@ -47,7 +47,7 @@
 		}
 	],
 	"variables":{
-		"iso": "[{{env `datastore`}}] isos/rhel7_server.iso",
+		"iso": "[{{env `iso_datastore`}}] isos/rhel7_server.iso",
 		"vcenter_password":"{{env `vcenter_password`}}",
 		"vcenter_username":"{{env `vcenter_username`}}",
 		"vcenter_server":"{{env `vcenter_server`}}",

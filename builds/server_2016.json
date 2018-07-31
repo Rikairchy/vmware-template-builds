@@ -50,9 +50,9 @@
 		}
 	],
 	"variables":{
-		"iso": "[{{env `datastore`}}] isos/server_2016.iso",
-		"vmware_tools": "[{{env `datastore`}}] isos/vmware_tools.iso",
-		"pvscsi_driver":"[{{env `datastore`}}] drivers/pvscsi-Windows8.flp",
+		"iso": "[{{env `iso_datastore`}}] isos/server_2016.iso",
+		"vmware_tools": "[{{env `iso_datastore`}}] isos/vmware_tools.iso",
+		"pvscsi_driver":"[{{env `iso_datastore`}}] drivers/pvscsi-Windows8.flp",
 		"vcenter_password":"{{env `vcenter_password`}}",
 		"vcenter_username":"{{env `vcenter_username`}}",
 		"vcenter_server":"{{env `vcenter_server`}}",

@@ -43,7 +43,7 @@
 		}
 	],
 	"variables":{
-		"iso": "[{{env `datastore`}}] isos/centos7.iso",
+		"iso": "[{{env `iso_datastore`}}] isos/centos7.iso",
 		"vcenter_password":"{{env `vcenter_password`}}",
 		"vcenter_username":"{{env `vcenter_username`}}",
 		"vcenter_server":"{{env `vcenter_server`}}",

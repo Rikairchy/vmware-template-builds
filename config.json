@@ -1,6 +1,7 @@
 {
 		"vcenter_server":"vcenter01.internal.homelab.systems",
 		"cluster": "cluster01",
+		"iso_datastore":"iso",
 		"datastore": "vmware",
 		"folder":"templates",
 		"packer-plugin":2.0
