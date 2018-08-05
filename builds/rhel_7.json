@@ -31,7 +31,7 @@
 				"unattend/ks.cfg"
 			],
 			"boot_command":[
-				"<tab> text ks=hd:fd0:/ks.cfg <enter>"
+				"<tab> text net.ifnames=0 ks=hd:fd0:/ks.cfg <enter>"
 			]
 
 		}
