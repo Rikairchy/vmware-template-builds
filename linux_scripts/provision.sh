@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 set -e
-#set consistent int names
-mount /dev/fd0 /media/
 cat /etc/default/grub | sed 's/ rhgb quiet"/"/' > /etc/default/grub
 grub2-mkconfig /etc/default/grub -o /boot/grub2/grub.cfg
 
