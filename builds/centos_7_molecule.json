@@ -1,0 +1,56 @@
+{
+
+	"builders":[
+		{
+			"type": "vsphere-iso",
+			"guest_os_type":"rhel7_64Guest",
+			"vcenter_server":"{{user `vcenter_server`}}",
+			"username":"{{user `vcenter_username`}}",
+			"password":"{{user `vcenter_password`}}",
+			"cluster":"{{user `cluster`}}",
+			"host":"{{user `esx_host`}}",
+			"datastore":"{{user `datastore`}}",
+			"folder":"templates",
+			"insecure_connection": true,
+			"vm_name":"{{user `vm_name`}}",
+			"CPUs": 1,
+			"CPU_limit": -1,
+			"RAM": 2048,
+			"disk_size":40960,
+			"disk_thin_provisioned":true,
+			"disk_controller_type":"pvscsi",
+			"network_card": "vmxnet3",
+			"convert_to_template":true,
+			"network": "vlan2",
+			"usb_controller": true,
+			"iso_paths": ["{{user `iso`}}"],
+			"communicator":"ssh",
+			"ssh_username":"root",
+			"ssh_password":"{{user `ssh_password`}}",
+			"floppy_files": [
+				"unattend/ks_molecule.cfg"
+			],
+			"boot_command":[
+				"<tab> text net.ifnames=0 ks=hd:fd0:/ks_molecule.cfg <enter>"
+			]
+
+		}
+	],
+	"provisioners":[
+		{
+			"type":"shell",
+			"script":"linux_scripts/provision.sh"
+		}
+	],
+	"variables":{
+		"iso": "[{{env `iso_datastore`}}] isos/centos7.iso",
+		"vcenter_password":"{{env `vcenter_password`}}",
+		"vcenter_username":"{{env `vcenter_username`}}",
+		"vcenter_server":"{{env `vcenter_server`}}",
+		"esx_host":"{{env `esx_host`}}",
+		"ssh_password":"{{env `login_password`}}",
+		"cluster": "{{env `cluster`}}",
+		"datastore": "{{env `datastore`}}",
+		"vm_name": "centos7_template_molecule"
+	}
+}

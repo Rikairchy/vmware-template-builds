@@ -1,0 +1,65 @@
+{
+	"builders":[
+		{
+			"type": "vsphere-iso",
+			"guest_os_type":"windows9_64Guest",
+			"vcenter_server":"{{user `vcenter_server`}}",
+			"username":"{{user `vcenter_username`}}",
+			"password":"{{user `vcenter_password`}}",
+			"cluster":"{{user `cluster`}}",
+			"host":"{{user `esx_host`}}",
+			"datastore":"{{user `datastore`}}",
+			"folder":"templates",
+			"insecure_connection": true,
+			"vm_name":"{{user `vm_name`}}",
+			"CPUs": 2,
+			"CPU_limit": -1,
+			"RAM": 4096,
+			"disk_size":40960,
+			"disk_thin_provisioned":true,
+			"disk_controller_type":"pvscsi",
+			"network_card": "vmxnet3",
+			"network": "vlan2",
+			"usb_controller": true,
+			"iso_paths": ["{{user `iso`}}","{{user `vmware_tools`}}"],
+			"communicator":"winrm",
+			"winrm_username": "Administrator",
+      		"winrm_password": "{{user `winrm_password`}}",
+      		"winrm_use_ssl":true,
+      		"winrm_insecure":true,
+			"shutdown_command": "A:/packer_shutdown.bat",
+			"convert_to_template":true,
+			"shutdown_timeout":"12h",
+			"floppy_img_path":"{{user `pvscsi_driver`}}",
+			"floppy_files": [
+				"desktop_unattend/AutoUnattend.xml",
+				"unattend/sysprep.xml",
+				"windows_scripts/bootstrap.ps1",
+				"windows_scripts/SetupComplete.cmd",
+				"windows_scripts/packer_shutdown.bat",
+				"windows_scripts/ansible_winrm.ps1"
+			]
+		}
+	],
+	"provisioners":[
+		{
+			"type":"powershell",
+			"script":"windows_scripts/provision.ps1",
+			"elevated_user":"Administrator",
+			"elevated_password":"{{user `winrm_password`}}"
+		}
+	],
+	"variables":{
+		"iso": "[{{env `datastore`}}] isos/win10.iso",
+		"vmware_tools": "[{{env `datastore`}}] isos/vmware_tools.iso",
+		"pvscsi_driver":"[{{env `datastore`}}] drivers/pvscsi-Windows8.flp",
+		"vcenter_password":"{{env `vcenter_password`}}",
+		"vcenter_username":"{{env `vcenter_username`}}",
+		"vcenter_server":"{{env `vcenter_server`}}",
+		"esx_host":"{{env `esx_host`}}",
+		"winrm_password":"{{env `login_password`}}",
+		"cluster": "{{env `cluster`}}",
+		"datastore": "{{env `datastore`}}",
+		"vm_name": "win10_template"
+	}
+}
