@@ -39,7 +39,7 @@
 	"provisioners":[
 		{
 			"type":"shell",
-			"script":"linux_scripts/provision.sh"
+			"script":"linux_scripts/molecule_provision.sh"
 		}
 	],
 	"variables":{
