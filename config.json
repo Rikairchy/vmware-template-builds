@@ -1,8 +1,8 @@
 {
-		"vcenter_server":"vcenter01.internal.homelab.systems",
-		"cluster": "cluster01",
-		"iso_datastore":"iso",
-		"datastore": "vmware",
+		"vcenter_server":"vcenter2.rikairchy.net",
+		"cluster": "MattLab",
+		"iso_datastore":"ISOs",
+		"datastore": "SYSTEM",
 		"folder":"templates",
 		"packer-plugin":2.0
 }
