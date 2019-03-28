@@ -1,0 +1,11 @@
+export vcenter_password=pass
+export vcenter_username=Domain\\svc.account
+export vcenter_server=vcenter_address
+export esx_host=vcenter.host
+export redhat_sub_user=user_name
+export redhat_sub_pass=rhel_pass
+export login_password=ks_password
+export cluster=cluster_name
+export datastore=datastore_name
+export datacenter=datacenter_name
+export iso_datastore=ISO_location
