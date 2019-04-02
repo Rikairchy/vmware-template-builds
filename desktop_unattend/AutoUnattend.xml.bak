@@ -4,20 +4,28 @@
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>1q2w3e4r!Q@W#E$R</Value>
-                    <PlainText>true</PlainText>
+                    <Value>NwBsAGoAcQBPAGQAWQB0ACoAVQBaAGgASQBoACcAXgBrAEEAMQB5AEEAZABtAGkAbgBpAHMAdAByAGEAdABvAHIAUABhAHMAcwB3AG8AcgBkAA==</Value>
+                    <PlainText>false</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <SkipMachineOOBE>true</SkipMachineOOBE>
+            </OOBE>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>powershell.exe -File A:\bootstrap.ps1</CommandLine>
+                    <Order>2</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
+                    <CommandLine>powershell.exe -Command &amp;{Set-ExecutionPolicy -ExecutionPolicy RemoteSigned}</CommandLine>
                 </SynchronousCommand>
             </FirstLogonCommands>
             <AutoLogon>
                 <Password>
-                    <Value>1q2w3e4r!Q@W#E$R</Value>
-                    <PlainText>true</PlainText>
+                    <Value>NwBsAGoAcQBPAGQAWQB0ACoAVQBaAGgASQBoACcAXgBrAEEAMQB5AFAAYQBzAHMAdwBvAHIAZAA=</Value>
+                    <PlainText>false</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
                 <Username>Administrator</Username>
@@ -38,17 +46,13 @@
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <UserData>
                 <AcceptEula>true</AcceptEula>
-                <FullName>ODINLA</FullName>
-                <ProductKey>
-                     <Key>86DGN-W6MX7-XRPVG-4PK4D-JT2HR</Key>
-                </ProductKey>
             </UserData>
             <ImageInstall>
                 <OSImage>
                     <InstallFrom>
                         <MetaData wcm:action="add">
-                            <Key>/IMAGE/INDEX</Key>
-                            <Value>4</Value>
+                            <Key>/IMAGE/NAME</Key>
+                            <Value>Windows 10 Enterprise Evaluation</Value>
                         </MetaData>
                     </InstallFrom>
                     <WillShowUI>OnError</WillShowUI>
@@ -101,5 +105,5 @@
             </DriverPaths>
         </component>
     </settings>
-    <cpi:offlineImage cpi:source="wim:e:/windows-wims/2016server/install.wim#Windows Server 2016 SERVERDATACENTERCORE" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+    <cpi:offlineImage cpi:source="wim:c:/users/philip.bove/wim/win10enterprise.wim#Windows 10 Enterprise Evaluation" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>

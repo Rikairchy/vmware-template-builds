@@ -1,4 +1,5 @@
 $ErrorActionPreference = "Stop"
+Set-NetConnectionProfile -InterfaceIndex $(Get-NetConnectionProfile -InterfaceAlias "Ethernet0").InterfaceIndex -NetworkCategory Private
 #install chocolatey
 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 Install-PackageProvider -Name NuGet -Force

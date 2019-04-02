@@ -7,6 +7,7 @@
 			"username":"{{user `vcenter_username`}}",
 			"password":"{{user `vcenter_password`}}",
 			"cluster":"{{user `cluster`}}",
+                        "datacenter":"{{user `datacenter`}}",
 			"host":"{{user `esx_host`}}",
 			"datastore":"{{user `datastore`}}",
 			"folder":"templates",
@@ -17,7 +18,7 @@
 			"RAM": 4096,
 			"disk_size":40960,
 			"disk_thin_provisioned":true,
-			"disk_controller_type":"pvscsi",
+			"disk_controller_type":"lsilogic-sas",
 			"network_card": "vmxnet3",
 			"network": "vlan2",
 			"usb_controller": true,
@@ -59,6 +60,7 @@
 		"esx_host":"{{env `esx_host`}}",
 		"winrm_password":"{{env `login_password`}}",
 		"cluster": "{{env `cluster`}}",
+                "datacenter":"{{env `datacenter`}}",
 		"datastore": "{{env `datastore`}}",
 		"vm_name": "win10_template"
 	}
